@@ -23,6 +23,7 @@ app.get('/', (req, res) => {
 
 async function main() {
   try {
+    mongoose.set('strictQuery', true);
     await mongoose.connect(DB_URI);
 
     console.log('Mongo DB conectado.');

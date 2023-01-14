@@ -1,16 +1,17 @@
 const Person  = require('../models/Person');
 
 class PersonController {
-  async create(request, response) {
-    const { name, email, salary, approved } = request.body;
-    const personData = {
-      name,
-      email,
-      salary,
-      approved
-    };
 
+  async create(request, response) {
     try {
+      const { name, email, salary, approved } = request.body;
+      const personData = {
+        name,
+        email,
+        salary,
+        approved
+      };
+
       const emailExists = await Person.findOne({ email });
 
       if (emailExists) {
@@ -23,6 +24,29 @@ class PersonController {
     } catch (error) {
       return response.status(500).json({
          error: error.message
+      });
+    }
+  }
+
+  async read(request, response) {
+    try {
+      const id = request.params.id;
+
+      if (id) {
+        const person = await Person.findOne({ _id: id });
+
+        if (!person) {
+          return response.status(422).json({ message: 'Usuário não encontrado' });
+        }
+        return response.status(200).json(person);
+      } else {
+          const people = await Person.find();
+
+          return response.status(200).json(people);
+      }
+    } catch (error) {
+      return response.status(500).json({
+        error: error.message
       });
     }
   }
