@@ -62,7 +62,7 @@ class PersonController {
 
       if (update.matchedCount) {
         const updatedPerson = await Person.findOne({ _id: id });
-        return response.status(200).json(updatedPerson);
+        return response.status(200).json({ updated: updatedPerson });
       }
         
       return response.status(422).json({ message: 'Atualização malsucedida' });
@@ -78,8 +78,10 @@ class PersonController {
 
     if (person) {
       try {
-        const deletedPerson = await Person.deleteOne({ _id: id });
-        response.status(200).json(deletedPerson);
+        const deleted = await Person.deleteOne({ _id: id });
+        if (deleted.deletedCount) {
+          response.status(200).json({ deleted: person });
+        }
       } catch (error) {
         response.status(500).json({ message: error.message });
       }
