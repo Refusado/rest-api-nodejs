@@ -3,7 +3,6 @@ require('dotenv').config();
 const express   = require('express');
 const mongoose  = require('mongoose');
 const app       = express();
-const routes    = require('./routes/person.routes');
 
 const port      = process.env.PORT || 3000;
 const dbUri     = process.env.DB_URI;
@@ -13,9 +12,13 @@ const dbOptions = {
   pass: encodeURIComponent(process.env.DB_PASS),
 }
 
+const user      = require('./routes/user.routes');
+const activity  = require('./routes/activity.routes');
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(routes);
+app.use(user);
+app.use(activity);
 
 try {
   mongoose.set('strictQuery', true);

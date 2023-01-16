@@ -1,32 +1,25 @@
 const mongoose = require('mongoose');
 
-const Person = new mongoose.Schema({
+const User = new mongoose.Schema({
  name: {
   type: String,
   required: true,
  },
-
  email: {
   type: String,
   required: true,
   unique: true,
   lowercase: true
  },
-
- salary: {
-  type: Number,
-  required: false
- },
-
- approved: {
+ isEnterprise: {
   type: Boolean,
-  required: true,
+  requiredd: true,
+  default: false,
  },
-
  createdAt: {
   type: Date,
   default: Date.now,
  }
 });
 
-module.exports = mongoose.model('Person', Person);
+module.exports = mongoose.model('User', User);
