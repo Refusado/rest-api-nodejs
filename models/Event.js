@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const Activity = new mongoose.Schema({
+const Event = new mongoose.Schema({
   name: {
     type: String,
     required: true,
@@ -9,7 +9,7 @@ const Activity = new mongoose.Schema({
     type: String,
     required: true,
   },
-  craetedBy: {
+  byUser: {
     type: String,
     required: true,
   },
@@ -20,4 +20,4 @@ const Activity = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model('Activity', Activity);
+module.exports = mongoose.model('Event', Event);

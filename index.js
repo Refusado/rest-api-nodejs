@@ -12,13 +12,13 @@ const dbOptions = {
   pass: encodeURIComponent(process.env.DB_PASS),
 }
 
-const user      = require('./routes/user.routes');
-const activity  = require('./routes/activity.routes');
+const user  = require('./routes/user.routes');
+const event = require('./routes/event.routes');
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(user);
-app.use(activity);
+app.use(event);
 
 try {
   mongoose.set('strictQuery', true);

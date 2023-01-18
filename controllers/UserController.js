@@ -70,14 +70,12 @@ class UserController {
       };
 
       const update = await User.updateOne( {_id: id }, userData);
-
       if (update.matchedCount) {
         const updatedUser = await User.findOne({ _id: id });
         return response.status(200).json({ updated: updatedUser });
       }
         
       return response.status(422).json({ message: 'Atualização malsucedida' });
-
     } catch (error) {
       return response.status(500).json({ error: error.message });
     }
